@@ -1,4 +1,15 @@
 # aws-loadbalancer-ansible
+Está é uma playbook no ansible para provisinarmos uma aplicação web na AWS
+
+```mermaid
+graph TD;
+    Loadbalancer-->APP01;
+    Loadbalancer-->APP02;
+    APP01-->Database;
+    APP02-->Database;
+```
+
+
 # Algumas alterações são necessarias
 ## Dentro de group_var/
   Apague o arquivo all e crie um novo com os seguintes parametros:
