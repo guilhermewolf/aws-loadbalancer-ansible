@@ -18,6 +18,7 @@
             Name: lb01
         instance_tags:
             Name: lb01
+            Group: bananas
       register: lb
 
     - name: Provision WebServer1
@@ -35,6 +36,7 @@
             Name: app01
         instance_tags:
             Name: app01
+            Group: bananas
       register: app
 
     - name: Provision WebServer2
@@ -52,6 +54,7 @@
             Name: app02
         instance_tags:
             Name: app02
+            Group: bananas
       register: app
 
     - name: Provision Database
@@ -69,6 +72,7 @@
             Name: db01
         instance_tags:
             Name: db01
+            Group: bananas
       register: db
 
     - name: refresh_inventory
@@ -94,6 +98,6 @@
       apt: update_cache=yes cache_valid_time=86400
       tags: [ 'packages' ]
 
-- include: database.yml
-- include: webserver.yml
-- include: loadbalancer.yml
+#- include: database.yml
+#- include: webserver.yml
+#- include: loadbalancer.yml
