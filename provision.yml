@@ -1,0 +1,92 @@
+---
+- hosts: localhost
+  connection: local
+  gather_facts: False
+
+  tasks:
+    - name: Gather Facts to check if a similar instance is running
+      ec2_remote_facts:
+        aws_access_key: "{{ aws_access_key }}"
+        aws_secret_key: "{{ aws_secret_key }}"
+        region: us-east-1
+        filters:
+          instance-state-name: running
+          "tag:Name" : "{{ item }}"
+      register: ec2_exists
+      with_items:
+        - lb01
+        - app01
+        - app02
+        - db01
+
+    - name: Provision Loadbalancer
+      ec2:
+          aws_access_key: "{{ aws_access_key }}"
+          aws_secret_key: "{{ aws_secret_key }}"
+          key_name: teste-ec2
+          group: webserver
+          instance_type: t2.micro
+          image: ami-05a36d3b9aa4a17ac
+          wait: true
+          exact_count: 1
+          region: us-east-1
+          count_tag:
+              Name: loadbalancer
+          instance_tags:
+              Name: lb01
+      register: loadbalancer
+      when: ec2_exists.instances
+
+    - name: Provision WebServer1
+      ec2:
+          aws_access_key: "{{ aws_access_key }}"
+          aws_secret_key: "{{ aws_secret_key }}"
+          key_name: teste-ec2
+          group: webserver
+          instance_type: t2.micro
+          image: ami-05a36d3b9aa4a17ac
+          wait: true
+          exact_count: 1
+          region: us-east-1
+          count_tag:
+              Name: WebServer1
+          instance_tags:
+              Name: app01
+      register: WebServer1
+      when: ec2_exists.results[0].state != 'running'
+
+    - name: Provision WebServer2
+      ec2:
+          aws_access_key: "{{ aws_access_key }}"
+          aws_secret_key: "{{ aws_secret_key }}"
+          key_name: teste-ec2
+          group: webserver
+          instance_type: t2.micro
+          image: ami-05a36d3b9aa4a17ac
+          wait: true
+          exact_count: 1
+          region: us-east-1
+          count_tag:
+              Name: WebServer2
+          instance_tags:
+              Name: app02
+      register: WebServer2
+      when: ec2_exists.results[0].state != 'running'
+
+    - name: Provision Database
+      ec2:
+          aws_access_key: "{{ aws_access_key }}"
+          aws_secret_key: "{{ aws_secret_key }}"
+          key_name: teste-ec2
+          group: database
+          instance_type: t2.micro
+          image: ami-05a36d3b9aa4a17ac
+          wait: true
+          exact_count: 1
+          region: us-east-1
+          count_tag:
+              Name: Database
+          instance_tags:
+              Name: db01
+      register: Database
+      when: ec2_exists.results[0].state != 'running'
