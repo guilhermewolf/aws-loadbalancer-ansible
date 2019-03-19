@@ -1,13 +1,10 @@
 # aws-loadbalancer-ansible
 Está é uma playbook no ansible para provisinarmos uma aplicação web na AWS
 
-```mermaid
-graph TD;
-    Loadbalancer-->APP01;
-    Loadbalancer-->APP02;
-    APP01-->Database;
-    APP02-->Database;
-```
+<div align="center" style="float: left">
+  <img alt="chart" width="250" src="https://github.com/guilhermewolf/aws-loadbalancer-ansible/blob/master/chart.png" /><img alt="chart" width="250" src="https://github.com/guilhermewolf/aws-loadbalancer-ansible/blob/master/chart.png" />
+</div>
+
 
 
 # Algumas alterações são necessarias
