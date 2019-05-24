@@ -1,8 +1,0 @@
----
-db_name: demo
-db_user: demo
-db_pass: teste
-key_name: teste-ec2
-instance_type: t2.micro
-region: us-east-1
-image: ami-05a36d3b9aa4a17ac
