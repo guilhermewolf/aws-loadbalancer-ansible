@@ -1,5 +1,5 @@
 ---
-- hosts: "tag_Group_bananas"
+- hosts: cluster
   connection: "local"
   gather_facts: False
   tasks:

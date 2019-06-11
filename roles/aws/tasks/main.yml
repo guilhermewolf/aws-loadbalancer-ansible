@@ -1,0 +1,75 @@
+---
+- name: Provision security group
+  ec2_group:
+    name: "{{ security_group }}"
+    description: security group
+    aws_access_key: "{{ aws_access_key }}"
+    aws_secret_key: "{{ aws_secret_key }}"
+    region: "{{ region }}"
+    rules:
+      - proto: tcp
+        from_port: 22
+        to_port: 22
+        cidr_ip: 0.0.0.0/0
+      - proto: all
+        group_name: "{{ security_group }}"
+      - proto: tcp
+        from_port: 80
+        to_port: 80
+        cidr_ip: 0.0.0.0/0
+
+- name: Provision Loadbalancer
+  ec2_instance:
+    aws_access_key: "{{ aws_access_key }}"
+    aws_secret_key: "{{ aws_secret_key }}"
+    name: lb01
+    key_name: "{{ key_name }}"
+    security_group: "{{ security_group }}"
+    instance_type: "{{ instance_type }}"
+    image_id: "{{ image }}"
+    wait: true
+    state: running
+    region: "{{ region }}"
+  register: lb
+
+- name: Provision WebServer1
+  ec2_instance:
+    aws_access_key: "{{ aws_access_key }}"
+    aws_secret_key: "{{ aws_secret_key }}"
+    key_name: "{{ key_name }}"
+    name: app01
+    security_group: "{{ security_group }}"
+    instance_type: "{{ instance_type }}"
+    image_id: "{{ image }}"
+    wait: true
+    state: running
+    region: "{{ region }}"
+  register: app
+
+- name: Provision WebServer2
+  ec2_instance:
+    aws_access_key: "{{ aws_access_key }}"
+    aws_secret_key: "{{ aws_secret_key }}"
+    key_name: "{{ key_name }}"
+    name: app02
+    security_group: "{{ security_group }}"
+    instance_type: "{{ instance_type }}"
+    image_id: "{{ image }}"
+    wait: true
+    state: running
+    region: "{{ region }}"
+  register: app
+
+- name: Provision Database
+  ec2_instance:
+    aws_access_key: "{{ aws_access_key }}"
+    aws_secret_key: "{{ aws_secret_key }}"
+    key_name: "{{ key_name }}"
+    name: db01
+    security_group: "{{ security_group }}"
+    instance_type: "{{ instance_type }}"
+    image_id: "{{ image }}"
+    wait: true
+    state: running
+    region: "{{ region }}"
+  register: db
