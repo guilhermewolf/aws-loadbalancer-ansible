@@ -1,0 +1,7 @@
+.vscode
+*.retry
+*.lock
+teste.yml
+vartest.yml
+ansible.cfg
+roles/awsautoscaling/files/user_data

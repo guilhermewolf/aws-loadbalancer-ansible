@@ -1,0 +1,11 @@
+---
+db_name: demo
+db_user: demo
+db_pass: teste
+key_name: lb-ansible
+instance_type: t2.micro
+region: us-east-1
+image: ami-05a36d3b9aa4a17ac
+aws_access_key: "{{ lookup('env','AWS_ACCESS_KEY_ID') }}"
+aws_secret_key: "{{ lookup('env','AWS_SECRET_ACCESS_KEY') }}"
+security_group: WebDMZ

@@ -7,7 +7,7 @@
       ec2:
         aws_access_key: "{{ aws_access_key }}"
         aws_secret_key: "{{ aws_secret_key }}"
-        key_name: ansible
+        key_name: teste-ec2
         group: webserver
         instance_type: t2.micro
         image: ami-05a36d3b9aa4a17ac
@@ -24,7 +24,7 @@
       ec2:
         aws_access_key: "{{ aws_access_key }}"
         aws_secret_key: "{{ aws_secret_key }}"
-        key_name: ansible
+        key_name: teste-ec2
         group: webserver
         instance_type: t2.micro
         image: ami-05a36d3b9aa4a17ac
@@ -41,7 +41,7 @@
       ec2:
         aws_access_key: "{{ aws_access_key }}"
         aws_secret_key: "{{ aws_secret_key }}"
-        key_name: ansible
+        key_name: teste-ec2
         group: webserver
         instance_type: t2.micro
         image: ami-05a36d3b9aa4a17ac
@@ -58,7 +58,7 @@
       ec2:
         aws_access_key: "{{ aws_access_key }}"
         aws_secret_key: "{{ aws_secret_key }}"
-        key_name: ansible
+        key_name: teste-ec2
         group: database
         instance_type: t2.micro
         image: ami-05a36d3b9aa4a17ac

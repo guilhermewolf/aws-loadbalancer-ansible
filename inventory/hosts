@@ -8,6 +8,11 @@ tag_Name_app02
 [database:children]
 tag_Name_db01
 
+[cluster:children]
+loadbalancer
+webserver
+database
+
 [all:vars]
 ansible_ssh_user=ubuntu
-ansible_ssh_private_key_file= ~/ansible.pem
+ansible_ssh_private_key_file= ~/lb-ansible.pem

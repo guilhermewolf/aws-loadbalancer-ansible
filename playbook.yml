@@ -1,0 +1,52 @@
+---
+- name: AWS Provision
+  hosts: localhost
+  connection: local
+  gather_facts: False
+  tasks:
+    - include_role:
+        name: aws
+
+- name: refresh_inventory
+  hosts: localhost
+  gather_facts: False
+  tasks:
+    - meta: refresh_inventory
+
+- name: Wait vms go up
+  hosts: all
+  user: ubuntu
+  gather_facts: False
+  tasks:
+    - wait_for_connection:
+        timeout: 300
+
+- hosts: all
+  become: true
+  user: ubuntu
+  gather_facts: true
+  tasks:
+    - name: update apt cache
+      apt: update_cache=yes cache_valid_time=86400
+      tags: [ 'packages' ]
+
+- hosts: database
+  become: true
+  roles:
+    - role: mysql
+      db_user_name: "{{ db_user }}"
+      db_user_pass: "{{ db_pass }}"
+      db_user_host: '%'
+
+- hosts: webserver
+  become: true
+  gather_facts: false
+  roles:
+    - apache2
+    - demo_app
+
+- hosts: loadbalancer
+  become: true
+  gather_facts: false
+  roles:
+    - nginx
