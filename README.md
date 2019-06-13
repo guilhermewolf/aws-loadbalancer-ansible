@@ -6,19 +6,27 @@ Está é uma playbook no ansible para provisinarmos uma aplicação web na AWS
 </div>
 
 
-
+#  Começamos baixando nossos arquivos
+```shell
+git clone https://github.com/guilhermewolf/aws-loadbalancer-ansible.git
+```
 # Algumas alterações são necessarias
-## Dentro de group_var/
-  Apague o arquivo all e crie um novo com os seguintes parametros:
+##  Vamos editar dois arquivos
 
-    ---
-    db_name: demo
-    db_user: demo
-    db_pass: teste
-    aws_access_key: ###SUACHAVE###
-    aws_secret_key: ###SUACHAVE##
-## Dentro de inventory/hosts
-  Altere esse parametro com sua keypair usada para provisionar as maquinas
+  	group_vars/all.yml
+  		altere o nome da chave que você criou na AWS (key_name)
+  	inventory/hosts
+  		altere o local onde está a chave na sua maquina (ansible_ssh_private_key_file)
 
-    ansible_ssh_private_key_file= ##SUACHAVE##
-  > **Note:** No exemplo criei uma key pair chamada ansible e coloquei o arquivo no meu diretorio home
+##  Vamos colocar nossas credenciais da AWS como variáveis de ambiente
+```shell
+export AWS_ACCESS_KEY_ID= #SUA ACESSKEY#
+export AWS_SECRET_ACCESS_KEY= #SUA SECRET KEY#
+```
+  All set, let go!
+```shell
+ansible-playbook playbook.yml
+```
+  Agora veja toda a infraestrutura ser provisionada diante de seus olhos.
+
+  > **Pré-requisitos:** Ansible, Git, EC2 Key Pair, AWS Access key e Secret Key

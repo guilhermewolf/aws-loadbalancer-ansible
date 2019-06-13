@@ -1,6 +1,0 @@
----
-- hosts: control
-  become: true
-  gather_facts: false
-  roles:
-    - control
