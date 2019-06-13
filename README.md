@@ -6,10 +6,6 @@ Está é uma playbook no ansible para provisinarmos uma aplicação web na AWS
 </div>
 
 
-
-
-  > **Note:** No exemplo criei uma key pair chamada ansible e coloquei o arquivo no meu diretorio home
-
 #  Começamos baixando nossos arquivos
 ```shell
 git clone https://github.com/guilhermewolf/aws-loadbalancer-ansible.git
