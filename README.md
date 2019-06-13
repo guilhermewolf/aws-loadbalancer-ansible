@@ -28,3 +28,5 @@ export AWS_SECRET_ACCESS_KEY= #SUA SECRET KEY#
 ansible-playbook playbook.yml
 ```
   Agora veja toda a infraestrutura ser provisionada diante de seus olhos.
+
+  > **Pré-requisitos:** Ansible, Git, EC2 Key Pair, AWS Access key e Secret Key
