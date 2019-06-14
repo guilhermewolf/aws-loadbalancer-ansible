@@ -14,14 +14,26 @@
     - meta: refresh_inventory
 
 - name: Wait vms go up
-  hosts: all
+  hosts: cluster
   user: ubuntu
   gather_facts: False
   tasks:
     - wait_for_connection:
         timeout: 300
 
-- hosts: all
+- name: Wait for cloud init to finish
+  hosts: cluster
+  gather_facts: False
+  become: yes
+  tasks:
+    - cloud_init_data_facts:
+        filter: status
+      register: res
+      until: "res.cloud_init_data_facts.status.v1.stage is defined and not res.cloud_init_data_facts.status.v1.stage"
+      retries: 50
+      delay: 5
+
+- hosts: cluster
   become: true
   user: ubuntu
   gather_facts: true

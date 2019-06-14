@@ -2,7 +2,7 @@
 - name: install tools
   apt: name={{item}} state=present
   with_items:
-    - python-mysqldb
+    - python2.7-mysqldb
   tags: [ 'packages' ]
 
 - name: install mysql-server
