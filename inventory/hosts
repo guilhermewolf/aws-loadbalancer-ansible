@@ -15,4 +15,4 @@ database
 
 [all:vars]
 ansible_ssh_user=ubuntu
-ansible_ssh_private_key_file= ~/lb-ansible.pem
+ansible_ssh_private_key_file= ~/mykey.pem

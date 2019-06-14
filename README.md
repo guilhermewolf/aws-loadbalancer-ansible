@@ -11,7 +11,8 @@ Está é uma playbook no ansible para provisinarmos uma aplicação web na AWS
 git clone https://github.com/guilhermewolf/aws-loadbalancer-ansible.git
 ```
 # Algumas alterações são necessarias
-##  Vamos editar dois arquivos 
+
+##  Vamos editar dois arquivos
 
   	group_vars/all.yml
   		altere o nome da chave que você criou na AWS (key_name)
